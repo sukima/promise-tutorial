@@ -1,0 +1,15 @@
+{
+  "name": "promise-tutorial",
+  "version": "1.0.0",
+  "description": "promise-tutorial wiki",
+  "private": true,
+  "scripts": {
+    "start": "tiddlywiki wiki --server",
+    "build": "tiddlywiki wiki-dist --rendertiddler '$:/core/save/all' index.html text/plain"
+  },
+  "author": "Devin Weaver <suki@tritarget.org> (http://tritarget.org/)",
+  "license": "CC BY 4.0",
+  "devDependencies": {
+    "tiddlywiki": "^5.1.8"
+  }
+}
