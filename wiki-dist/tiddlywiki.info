@@ -1,7 +1,8 @@
 {
     "description": "Basic HTML edition",
     "plugins": [
-        "tiddlywiki/highlight"
+        "tiddlywiki/highlight",
+        "tiddlywiki/railroad"
     ],
     "themes": [
         "tiddlywiki/vanilla",
