@@ -1,7 +1,15 @@
 created: 20150603130455532
-modified: 20150603130610243
-tags: meta
+creator: Sukima
+modified: 20150611123511658
+modifier: Sukima
+tags: Meta
 title: License
 type: text/vnd.tiddlywiki
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Testing Async ~JavaScript</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">[[Devin Weaver]]</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+\define rel-link(title) <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by/4.0/">$title$</a>
+
+<div style="text-align:center;">
+<<rel-link "[img [CC-BY.png]]">>
+<br/>
+Testing Async ~JavaScript by [[Devin Weaver]] is licensed under a <<rel-link "Creative Commons Attribution 4.0 International License">>.
+</div>
