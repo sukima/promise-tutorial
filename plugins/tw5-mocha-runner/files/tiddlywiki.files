@@ -1,0 +1,38 @@
+{
+  "tiddlers": [
+    {
+      "file": "mocha.css",
+      "fields": {
+        "type": "text/css",
+        "tags": ["$:/tags/Stylesheet"],
+        "title": "$:/plugins/sukima/tw5-mocha-runner/mocha.css",
+        "module-type": "library"
+      }
+    },
+    {
+      "file": "mocha.js",
+      "fields": {
+        "type": "application/javascript",
+        "title": "$:/plugins/sukima/tw5-mocha-runner/mocha.js",
+        "module-type": "library"
+      },
+      "suffix": "module.exports = this.mocha;"
+    },
+    {
+      "file": "chai.js",
+      "fields": {
+        "type": "application/javascript",
+        "title": "$:/plugins/sukima/tw5-mocha-runner/chai.js",
+        "module-type": "library"
+      }
+    },
+    {
+      "file": "mocha-specs.js",
+      "fields": {
+        "type": "application/javascript",
+        "title": "$:/plugins/sukima/tw5-mocha-runner/mocha-specs.js",
+        "module-type": "widget"
+      }
+    }
+  ]
+}

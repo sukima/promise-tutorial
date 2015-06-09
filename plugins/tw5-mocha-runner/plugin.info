@@ -1,0 +1,9 @@
+{
+  "title": "$:/plugins/sukima/tw5-mocha-runner",
+  "description": "Allow example test suites to run with mocha in a container on the page",
+  "author": "sukima",
+  "version": "0.0.1",
+  "core-version": ">=5.1.8",
+  "source": "https://github.com/sukima/tw5-mocha-runner",
+  "plugin-type": "plugin"
+}

@@ -1,0 +1,9 @@
+title: $:/plugins/sukima/tw5-mocha-runner/Output
+tags: $:/tags/SideBar
+type: text/vnd.tiddlywiki
+caption: Output
+list-before: $:/core/ui/SideBar/Open
+
+<div id="mocha">
+Select an example to run the specs.
+</div>
