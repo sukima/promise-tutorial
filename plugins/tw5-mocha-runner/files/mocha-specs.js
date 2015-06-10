@@ -134,26 +134,41 @@ MochaSpecWidget.prototype.handleViewCode = function() {
 MochaSpecWidget.prototype.handleRunSpecs = function() {
   var sideBarStateTiddler =
     $tw.wiki.filterTiddlers('[prefix[$:/state/tab/sidebar]]')[0];
-  $tw.wiki.setTextReference('$:/temp/search', '');
   if (sideBarStateTiddler) {
     $tw.wiki.setTextReference(sideBarStateTiddler, outputTiddlerTitle);
   }
+  $tw.wiki.setTextReference('$:/temp/search', '');
   $tw.utils.nextTick(this.runSpecs.bind(this));
 };
 
 MochaSpecWidget.prototype.runSpecs = function() {
   var output = document.getElementById('mocha');
-  if (output) {
-    output.innerHTML = '';
-    output.className = '';
-    mocha.suite.suites = [];
-    try {
-      this.code.call({mocha: mocha, chai: chai});
-      mocha.run();
-    } catch (e) {
-      console.error(e);
-      output.appendChild(this.makeErrorNode(e.toString()));
-    }
+  if (!output) {
+    console.error('Missing #mocha div. Can not run specs.');
+    return;
+  }
+
+  function finishedRunning() {
+    var badLinks = output.querySelectorAll('.suite a');
+    $tw.utils.each(badLinks, function(link) {
+      var linkContent = link.innerHTML;
+      if ($tw.utils.hasClass(link, 'replay')) {
+        link.remove();
+      } else {
+        link.parentNode.innerHTML = linkContent;
+      }
+    });
+  }
+
+  output.innerHTML = '';
+  output.className = '';
+  mocha.suite.suites = [];
+  try {
+    this.code.call({mocha: mocha, chai: chai});
+    mocha.run(finishedRunning);
+  } catch (e) {
+    console.error(e);
+    output.appendChild(this.makeErrorNode(e.toString()));
   }
 };
 
