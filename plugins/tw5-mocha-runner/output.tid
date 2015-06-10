@@ -4,6 +4,4 @@ type: text/vnd.tiddlywiki
 caption: Output
 list-before: $:/core/ui/SideBar/Open
 
-<div id="mocha">
-Select an example to run the specs.
-</div>
+<$mocha-output/>
