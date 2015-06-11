@@ -1,0 +1,11 @@
+created: 20150611122601192
+modified: 20150611172206732
+tags: Snippets
+title: IntroExample
+type: application/javascript
+
+describe('A reader of the tutotial', function() {
+  it('passes first example', function() {
+    expect('Hello kind reader').to.be.a.string
+  });
+});
