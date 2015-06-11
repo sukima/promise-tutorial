@@ -1,0 +1,15 @@
+created: 20150611023608291
+modified: 20150611023647376
+title: $:/config/CodeMirror
+type: application/json
+
+{
+  "require": [
+      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
+      "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js"
+  ],
+  "configuration": {
+      "matchBrackets":true,
+      "showCursorWhenSelecting": true
+  }
+}

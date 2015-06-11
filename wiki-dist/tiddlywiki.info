@@ -1,6 +1,7 @@
 {
     "description": "Basic HTML edition",
     "plugins": [
+        "tiddlywiki/codemirror",
         "tiddlywiki/highlight",
         "tiddlywiki/railroad"
     ],
