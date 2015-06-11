@@ -18,6 +18,10 @@
   clear: both;
 }
 
+#mocha a {
+  cursor: pointer;
+}
+
 #mocha ul,
 #mocha li {
   margin: 0;

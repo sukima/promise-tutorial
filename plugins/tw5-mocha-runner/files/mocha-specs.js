@@ -17,22 +17,37 @@ if (!$tw.browser) { return; }
 var mocha = require('$:/plugins/sukima/tw5-mocha-runner/mocha.js');
 var chai = require('$:/plugins/sukima/tw5-mocha-runner/chai.js');
 var Widget = require('$:/core/modules/widgets/widget.js').widget;
+// var ButtonWidget = require('$:/core/modules/widgets/button.js').button;
 var outputTiddlerTitle = '$:/plugins/sukima/tw5-mocha-runner/Output';
-var hljs;
-
-try {
-  hljs = require('$:/plugins/tiddlywiki/highlight/registerlanguages.js').hljs;
-} catch (e) {
-  hljs = null;
-}
 
 mocha.setup('bdd');
 
 function prepareCode(code) {
   return (
-    'var mocha = this.mocha, chai = this.chai, expect = this.chai.expect;' +
-    code
+    'var mocha = this.mocha,' +
+    'chai = this.chai,' +
+    'expect = this.chai.expect,' +
+    '$tw = {};' +
+    ($tw.utils.isArray(code) ? code.join(';') : code)
   );
+}
+
+function specsDoneFor(output) {
+  return function specsDone() {
+    var badLinks = output.querySelectorAll('.suite a');
+    $tw.utils.each(badLinks, function(link) {
+      var linkContent = link.innerHTML;
+      if ($tw.utils.hasClass(link, 'replay')) {
+        link.remove();
+      } else {
+        link.parentNode.innerHTML = linkContent;
+      }
+    });
+    badLinks = output.getElementsByTagName('a');
+    $tw.utils.each(badLinks, function(link) {
+      link.removeAttribute('href');
+    });
+  };
 }
 
 var MochaSpecWidget = function(parseTreeNode, options) {
@@ -47,83 +62,107 @@ MochaSpecWidget.prototype.render = function(parent, nextSibling) {
   this.execute();
   var domNode = document.createElement('div');
   domNode.appendChild(this.makeButtonBar());
-  if (this.code && !this.hasAttribute('hide')) {
-    domNode.appendChild(this.makeCodeNode(this.source));
-  } else if (!this.code) {
-    domNode.appendChild(this.makeErrorNode());
+  if (this.error) {
+    domNode.appendChild(this.makeErrorNode(this.error));
   }
   parent.appendChild(domNode);
   this.domNodes.push(domNode);
 };
 
-MochaSpecWidget.prototype.makeCodeNode = function(source) {
-  var pre = document.createElement('pre');
-  var code = document.createElement('code');
-  $tw.utils.addClass(code, 'javascript');
-  code.appendChild(document.createTextNode(source));
-  pre.appendChild(code);
-  if (hljs) {
-    hljs.highlightBlock(pre);
-  }
-  return pre;
-};
-
 MochaSpecWidget.prototype.makeButtonBar = function() {
-  var domNode, openButton;
-  openButton = this.hasAttribute('hide') ? 'View Code' : 'Edit Code';
-  domNode = document.createElement('div');
-  if (this.code) {
+  var domNode = document.createElement('div');
+  if (!this.error) {
     domNode.appendChild(
       this.makeButton('Run Specs', 'click', 'handleRunSpecs')
     );
   }
-  domNode.appendChild(this.makeButton(openButton, 'click', 'handleViewCode'));
+  domNode.appendChild(this.makeButton('Edit Code', 'click', 'handleViewCode'));
   return domNode;
 };
 
 MochaSpecWidget.prototype.makeButton = function(title, event, method) {
-  var button = document.createElement('button');
-  button.appendChild(document.createTextNode(title));
-  $tw.utils.addEventListeners(button, [
-    {name: event, handlerObject: this, handlerMethod: method}
-  ]);
-  return button;
+  return $tw.utils.domMaker('button', {
+    text: title,
+    eventListeners: [
+      {name: event, handlerObject: this, handlerMethod: method}
+    ]
+  });
 };
 
 MochaSpecWidget.prototype.makeErrorNode = function(error) {
-  var message = document.createElement('div');
-  $tw.utils.addClass(message, 'tc-error');
-  message.appendChild(document.createTextNode(error));
-  return message;
+  return $tw.utils.domMaker('div', {'class': 'tc-error', text: error});
+};
+
+MochaSpecWidget.prototype.setErrorState = function(error) {
+  this.code = null;
+  this.source = null;
+  this.error = error ?
+    error.replace('${filter}', this.getAttribute('filter')) :
+    null;
 };
 
 MochaSpecWidget.prototype.execute = function() {
-  var tiddler, sourceCode;
-  this.tiddlerTitle = this.getAttribute('tiddler');
-  tiddler = this.wiki.getTiddler(this.tiddlerTitle);
-  if (!tiddler) {
-    this.source = 'Unable to load target tiddler ' + this.tiddlerTitle;
-    this.code = null;
-  } else if (tiddler.getFieldString('type') !== 'application/javascript') {
-    this.source = 'Tiddler does not have a type of application/javascript';
-    this.code = null;
-  } else {
-    this.source = tiddler.getFieldString('text');
-    this.code = this.makeCode();
+  var sourceCode;
+
+  if (!this.hasAttribute('filter')) {
+    this.setErrorState('The mocha-specs widget requires a filter attribute.');
+    return;
+  }
+
+  this.filter = this.getAttribute('filter') +
+    ' +[field:type[application/javascript]]';
+
+  this.codeTiddlers = this.wiki.filterTiddlers(this.filter);
+
+  if (this.codeTiddlers.length === 0) {
+    this.setErrorState(
+      'No application/javascript tiddlers found matching filter "${filter}"'
+    );
+    return;
+  }
+
+  sourceCode = '';
+  $tw.utils.each(this.codeTiddlers, function(tiddler) {
+    sourceCode += $tw.wiki.getTiddlerText(tiddler);
+  });
+
+  this.setErrorState();
+  this.source = sourceCode;
+  this.code = this.makeSpecFunc(sourceCode);
+};
+
+MochaSpecWidget.prototype.makeSpecFunc = function(sourceCode) {
+  // jshint evil:true
+  try {
+    return new Function(prepareCode(sourceCode));
+  } catch (e) {
+    console.error(e);
+    this.setErrorState(e.toString());
   }
 };
 
-MochaSpecWidget.prototype.makeCode = function() {
-  // jshint evil:true
-  return new Function(prepareCode(this.source));
+MochaSpecWidget.prototype.refresh = function(changedTiddlers) {
+  this.computeAttributes();
+  this.execute();
+  var needsRefresh = false;
+  $tw.utils.each(this.codeTiddlers, function(title) {
+    if ($tw.utils.hop(changedTiddlers, title)) {
+      needsRefresh = true;
+      return false;
+    }
+  });
+  return needsRefresh;
 };
 
 MochaSpecWidget.prototype.handleViewCode = function() {
-  var tiddler = this.getAttribute('tiddler');
+  $tw.wiki.setTextReference(
+    '$:/temp/codetiddlers',
+    this.codeTiddlers.join(' ')
+  );
   var bounds = this.parentDomNode.getBoundingClientRect();
   this.dispatchEvent({
     type: 'tm-navigate',
-    navigateTo: tiddler,
+    navigateTo: '$:/CodeTiddlers',
     navigateFromTitle: this.getVariable('storyTiddler'),
     navigateFromNode: this.parentDomNode,
     navigateFromClientRect: bounds,
@@ -148,36 +187,17 @@ MochaSpecWidget.prototype.runSpecs = function() {
     return;
   }
 
-  function finishedRunning() {
-    var badLinks = output.querySelectorAll('.suite a');
-    $tw.utils.each(badLinks, function(link) {
-      var linkContent = link.innerHTML;
-      if ($tw.utils.hasClass(link, 'replay')) {
-        link.remove();
-      } else {
-        link.parentNode.innerHTML = linkContent;
-      }
-    });
-  }
-
   output.innerHTML = '';
   output.className = '';
   mocha.suite.suites = [];
+
   try {
     this.code.call({mocha: mocha, chai: chai});
-    mocha.run(finishedRunning);
+    mocha.run(specsDoneFor(output));
   } catch (e) {
     console.error(e);
     output.appendChild(this.makeErrorNode(e.toString()));
   }
-};
-
-MochaSpecWidget.prototype.refresh = function(changedTiddlers) {
-  if (changedTiddlers[this.tiddlerTitle] != null) {
-    this.refreshSelf();
-    return true;
-  }
-  return false;
 };
 
 exports['mocha-specs'] = MochaSpecWidget;

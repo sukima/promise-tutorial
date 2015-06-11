@@ -17,7 +17,8 @@ if (!$tw.browser) { return; }
 var Widget = require('$:/core/modules/widgets/widget.js').widget;
 
 // #mocha needs to be a static varibable that is reusable. Even though it gets
-// appended and removed as the widget is shown.
+// appended and removed as the widget is shown. Also outside the confines of an
+// instance we should not depend on $tw.utils.domMaker at this scope.
 var mochaDomNode = document.createElement('div');
 mochaDomNode.setAttribute('id', 'mocha');
 mochaDomNode.appendChild(

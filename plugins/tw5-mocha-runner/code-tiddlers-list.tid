@@ -1,0 +1,7 @@
+title: $:/CodeTiddlers
+tags:
+type: text/vnd.tiddlywiki
+
+These are the code snippits for that example:
+
+<$list filter={{$:/temp/codetiddlers}} template="$:/core/ui/ListItemTemplate"/>
