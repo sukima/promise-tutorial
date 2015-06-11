@@ -5,7 +5,13 @@
   "private": true,
   "scripts": {
     "start": "tiddlywiki wiki --server",
-    "build": "tiddlywiki wiki-dist --rendertiddler '$:/core/save/all' index.html text/plain"
+    "build": "tiddlywiki wiki-dist --rendertiddler '$:/core/save/all' index.html text/plain",
+    "copy-output": "cp ./wiki-dist/output/index.html ./index.html",
+    "git-co": "git checkout gh-pages && git reset --hard origin/gh-pages",
+    "git-stage": "npm run build && npm run git-co && npm run copy-output",
+    "git-commit": "git add -A . && git commit -a -m 'gh-pages update'",
+    "git-push": "git push origin gh-pages --force && git checkout master",
+    "deploy": "npm run git-stage && npm run git-commit && npm run git-push"
   },
   "author": "Devin Weaver <suki@tritarget.org> (http://tritarget.org/)",
   "license": "CC BY 4.0",
