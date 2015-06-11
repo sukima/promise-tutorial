@@ -1,0 +1,34 @@
+created: 20150611123427511
+creator: Sukima
+github_url: https://github.com/sukima/
+hompage: http://tritarget.org/
+modified: 20150611155719649
+modifier: Sukima
+tags: Meta
+title: Sukima
+twitter_url: https://twitter.com/sukima
+type: text/vnd.tiddlywiki
+
+\define ext-link(text, url, icon)
+<a class="tc-tiddlylink-external" target="_blank" href="$url$">
+  <$transclude tiddler="$icon$"/> $text$
+</a>
+\end
+\define field-link(text, field, icon)
+<$macrocall $name="ext-link" text="$text$" url={{!!$field$}} icon="$icon$"/>
+\end
+
+@@float:left;margin:10px; [img[SukimaGravatar]]@@
+
+! Devin Weaver
+
+<<field-link text:"@sukima" icon:"$:/core/images/github" field:"github_url">> <<field-link text:"@sukima" icon:"$:/core/images/twitter" field:"twitter_url">> <<field-link text:"~TriTarget.org" icon:"$:/core/images/globe" field:"hompage">>
+
+@@clear:both;
+@@
+
+People often think coding is about the user experience. What they forget is that the coder (or coders) involved (now or in the future) are more the user then the end users are. It is easy to make something look good for the client. It takes talent to make the process enjoyable and look good to other coders.
+
+Writing programs is an art.
+
+Quality is more then the end product.
