@@ -1,0 +1,15 @@
+created: 20150612001248725
+modified: 20150612001250713
+title: DeveloperNotes
+type: text/vnd.tiddlywiki
+
+Here is where I need some help. I need ideas an collaboration.
+
+!! Outline
+
+* About Async, use railroad plugin to illistrate code paths
+* Illistrate jQuery (callback vs promise/deferred)
+* Show code testing for callbacks
+* Promises
+* Show testing with promises
+* Tips & Tricks

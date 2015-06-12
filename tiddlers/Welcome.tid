@@ -1,6 +1,6 @@
 created: 20150611120601853
 creator: Sukima
-modified: 20150611172127070
+modified: 20150613192411810
 modifier: Sukima
 tags: Meta
 title: Welcome
@@ -10,7 +10,9 @@ type: text/vnd.tiddlywiki
 [img width=100 height=100 [logo.svg]]
 @@
 
-Thanks for checking out this little tiddly tutorial on testing asychronous javascript. Specifically [[promises|Promise]].
+DeveloperNotes
+
+Thanks for checking out this little tiddly tutorial on testing [[asychronous javascript|AsyncJavaScript]]. Specifically [[promises|Promise]].
 
 This tutorial uses [[Mocha]] with [[Chai]] to run the tests (see the pro/cons of the popular TestFrameworks). Examples are designed to run in the browser as your reading them. You can also EditTheCode to play with examples and learn as you go.
 
