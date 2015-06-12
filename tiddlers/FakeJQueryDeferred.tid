@@ -1,0 +1,29 @@
+created: 20150612020423540
+modified: 20150612024206138
+tags: Snippets
+title: FakeJQueryDeferred
+type: application/javascript
+
+// This is a Fake $.Deferred() to show how to test jQuery.
+// It is fake because jQuery Promises suck.
+// And I didn't want it here.
+var $ = {
+  Deferred: function() {
+    var resolve, reject;
+    var promise = new Promise(resolver, rejector) {
+      resolve = resolver;
+      reject = rejector;
+    });
+    var deferred = {
+      resolve: resolve,
+      reject: reject,
+      then: function(a, b) { promise = promise.then(a, b); return deferred; },
+      pipe: function(a, b) { promise = promise.then(a, b); return deferred; },
+      done: function(a) { promise = promise.then(a, b); return deferred; },
+      fail: function(a) { promise = promise.catch(a); return deferred; },
+      always: function(a) { promise = promise.finally(a); return deferred; },
+      promise: function() { return deferred; }
+    };
+    return deferred;
+  }
+};
