@@ -23,11 +23,12 @@ var outputTiddlerTitle = '$:/plugins/sukima/tw5-mocha-runner/Output';
 mocha.setup('bdd');
 
 function prepareCode(code) {
+  var preamble = $tw.wiki.getTiddlerText(
+    '$:/plugins/sukima/tw5-mocha-runner/preamble.js'
+  );
   return (
-    'var mocha = this.mocha,' +
-    'chai = this.chai,' +
-    'expect = this.chai.expect,' +
-    '$tw = {};' +
+    ';' +
+    (preamble ? preamble + ';' : '') +
     ($tw.utils.isArray(code) ? code.join(';') : code)
   );
 }

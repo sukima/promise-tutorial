@@ -1,0 +1,8 @@
+title: $:/plugins/sukima/tw5-mocha-runner/preamble.js
+type: application/javascript
+tags:
+
+var mocha = this.mocha;
+var chai = this.chai;
+var expect = this.chai.expect;
+var $tw = {};
