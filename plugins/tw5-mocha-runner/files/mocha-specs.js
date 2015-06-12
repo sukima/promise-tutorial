@@ -193,7 +193,7 @@ MochaSpecWidget.prototype.runSpecs = function() {
   mocha.suite.suites = [];
 
   try {
-    this.code.call({mocha: mocha, chai: chai});
+    this.code.call({require: require, mocha: mocha, chai: chai});
     mocha.run(specsDoneFor(output));
   } catch (e) {
     console.error(e);
