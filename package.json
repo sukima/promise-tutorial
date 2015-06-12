@@ -16,6 +16,9 @@
   "author": "Devin Weaver <suki@tritarget.org> (http://tritarget.org/)",
   "license": "CC BY 4.0",
   "devDependencies": {
+    "bower": "^1.4.1",
+    "chai": "^3.0.0",
+    "mocha": "^2.2.5",
     "tiddlywiki": "^5.1.8"
   }
 }

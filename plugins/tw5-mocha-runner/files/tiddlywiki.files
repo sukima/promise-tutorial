@@ -10,7 +10,7 @@
       }
     },
     {
-      "file": "mocha.js",
+      "file": "../../../../node_modules/mocha/mocha.js",
       "fields": {
         "type": "application/javascript",
         "title": "$:/plugins/sukima/tw5-mocha-runner/mocha.js",
@@ -19,7 +19,7 @@
       "suffix": "module.exports = this.mocha;"
     },
     {
-      "file": "chai.js",
+      "file": "../../../../node_modules/chai/chai.js",
       "fields": {
         "type": "application/javascript",
         "title": "$:/plugins/sukima/tw5-mocha-runner/chai.js",
