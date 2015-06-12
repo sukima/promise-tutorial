@@ -1,0 +1,12 @@
+{
+  "tiddlers": [
+    {
+      "file": "../../../../node_modules/bluebird/js/browser/bluebird.min.js",
+      "fields": {
+        "type": "application/javascript",
+        "title": "$:/plugins/sukima/bluebird/bluebird.js",
+        "module-type": "library"
+      }
+    }
+  ]
+}
