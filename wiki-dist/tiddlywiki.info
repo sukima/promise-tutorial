@@ -2,6 +2,7 @@
     "description": "Basic HTML edition",
     "plugins": [
         "tiddlywiki/codemirror",
+        "tiddlywiki/github-fork-ribbon",
         "tiddlywiki/highlight",
         "tiddlywiki/railroad"
     ],
