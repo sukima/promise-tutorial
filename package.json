@@ -1,7 +1,5 @@
 {
   "name": "promise-tutorial-production",
-  "version": "1.0.0",
-  "description": "promise-tutorial deployed wiki",
   "private": true,
   "scripts": {
     "start": "tiddlywiki wiki --server",
@@ -12,7 +10,5 @@
     "git-commit": "git add -A . && git commit -a -m 'gh-pages update'",
     "git-push": "git push origin gh-pages --force && git checkout master",
     "deploy": "npm run git-stage && npm run git-commit && npm run git-push"
-  },
-  "author": "Devin Weaver <suki@tritarget.org> (http://tritarget.org/)",
-  "license": "CC BY 4.0"
+  }
 }
