@@ -1,0 +1,10 @@
+created: 20150621013632329
+modified: 20150621013847859
+tags: Snippets
+title: SyncJSExample
+type: application/javascript
+
+runStatement(1);
+runStatement(2);
+runStatement(3);
+runStatement(4);

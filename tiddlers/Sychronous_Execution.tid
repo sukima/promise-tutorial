@@ -1,0 +1,34 @@
+created: 20150620031904719
+modified: 20150621014125792
+tags: 
+title: Sychronous Execution
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+"Statement 1"
+"Statement 2"
+"Statement 3"
+"Statement 4"
+"""/>
+
+Notice how each statement happens one after another? Synchronous code executes one statement at a time in the order they were coded. For example:
+
+<$railroad text="""
+"var a = 1;"
+"var b = 2;"
+"var c = a + b;"
+"console.log(c);"
+"""/>
+
+# Assign `a` to `1`.
+# Assign `b` to `2`.
+# Add `a` and `b`.
+# Assign `c` to previous result.
+# Call `console.log` with the value of `c`.
+# Display `3` in developer console.
+
+!!! Try it:
+
+<$mocha-specs filter="SyncJSSetup SyncJSExample"/>
+
+{{SyncJSExample}}

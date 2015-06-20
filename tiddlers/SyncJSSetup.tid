@@ -1,0 +1,15 @@
+created: 20150621012911426
+modified: 20150621014034157
+tags: Snippets Setup
+title: SyncJSSetup
+type: application/javascript
+
+var output = document.createElement('div');
+output.style.float = 'left';
+document.getElementById('mocha').appendChild(output);
+
+function runStatement(num) {
+  var p = document.createElement('p');
+  p.appendChild(document.createTextNode('Statement ' + num));
+  output.appendChild(p);
+}
