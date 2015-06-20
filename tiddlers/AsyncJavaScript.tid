@@ -1,0 +1,11 @@
+created: 20150619171431636
+modified: 20150620040003071
+tags: Definitions
+title: AsyncJavaScript
+type: text/vnd.tiddlywiki
+
+JavaScript has a specialized queue called the EventLoop which delegates statement execution. This EventLoop is used to manage the program execution because it is single threaded. When we talk about *asynchronosity* in JavaScript what we really mean is a queuing process that is the EventLoop.
+
+<<section "Sychronous Execution">>
+
+<<section "Asynchronous Execution">>
