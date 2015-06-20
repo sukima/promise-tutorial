@@ -1,0 +1,11 @@
+created: 20150620034509518
+modified: 20150620040410566
+tags: $:/tags/Macro
+title: $:/core/macros/Section
+type: text/vnd.tiddlywiki
+
+\define section(tiddler)
+!! <span class="section-title">$tiddler$<span> [[§|$tiddler$]]</span></span>
+
+{{$tiddler$}}
+\end

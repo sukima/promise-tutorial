@@ -1,0 +1,13 @@
+created: 20150620035455551
+modified: 20150620040345256
+tags: $:/tags/Stylesheet
+title: $:/core/ui/SectionStyle
+type: text/css
+
+span.section-title > span {
+  visibility: hidden;
+}
+
+span.section-title:hover > span {
+  visibility: visible;
+}
