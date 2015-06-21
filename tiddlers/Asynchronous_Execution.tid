@@ -1,0 +1,35 @@
+created: 20150620032114044
+modified: 20150621162331643
+tags: 
+title: Asynchronous Execution
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+<"Async Statement">
+(:
+"Statement 2"
+/"Call stack empty"/
+|
+/"async task completes and queues"/
+)
+"Statement 1"
+"""/>
+
+In this situation the code seems to execute //out of order// and this is because an ''asynchronous'' statement defers it's execution until a certain condition is met and then it adds itself to the ''end'' of the call stack. This means it won't be executed until all the other statements have completed.
+
+In this example we use the `setTimeout` function which waits till a specific amount of time has passed before placing the attached function at the end of the call stack.
+
+# Execute `runStatement(1)`.
+# Place a timer to the side to wait 0 miliseconds.
+# Execute `runStatement(3)`.
+# Timer complete add the function to the end of the call stack.
+# Call stack is complete look for more statements that were added.
+# Execute the function previously delayed.
+# Execute `runStatement(2)`.
+# Call stack complete.
+
+!!! Try it
+
+<$mocha-specs filter="SyncJSSetup AsyncJSExample"/>
+
+{{AsyncJSExample}}

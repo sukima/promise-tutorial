@@ -1,0 +1,9 @@
+created: 20150621014321079
+modified: 20150621014621621
+tags: Snippets
+title: AsyncJSExample
+type: application/javascript
+
+runStatement(1);
+setTimeout(function() { runStatement(2); }, 0);
+runStatement(3);
