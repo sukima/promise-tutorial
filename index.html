@@ -129,6 +129,10 @@ Error message and password prompt
 
 <li>$:/core</li>
 
+<li>$:/core/macros/Section</li>
+
+<li>$:/core/ui/SectionStyle</li>
+
 <li>$:/DefaultTiddlers</li>
 
 <li>$:/isEncrypted</li>
@@ -157,6 +161,12 @@ Error message and password prompt
 
 <li>$:/themes/tiddlywiki/vanilla</li>
 
+<li>Asynchronous Execution</li>
+
+<li>AsyncJavaScript</li>
+
+<li>AsyncJSExample</li>
+
 <li>CC-BY.png</li>
 
 <li>DeveloperNotes</li>
@@ -176,6 +186,12 @@ Error message and password prompt
 <li>Sukima</li>
 
 <li>SukimaGravatar</li>
+
+<li>Sychronous Execution</li>
+
+<li>SyncJSExample</li>
+
+<li>SyncJSSetup</li>
 
 <li>Welcome</li>
 
@@ -5689,6 +5705,22 @@ Error message and password prompt
     }
 }</pre>
 </div>
+<div created="20150620034509518" modified="20150620040410566" tags="$:/tags/Macro" title="$:/core/macros/Section" type="text/vnd.tiddlywiki">
+<pre>\define section(tiddler)
+!! &lt;span class=&quot;section-title&quot;&gt;$tiddler$&lt;span&gt; [[§|$tiddler$]]&lt;/span&gt;&lt;/span&gt;
+
+{{$tiddler$}}
+\end</pre>
+</div>
+<div created="20150620035455551" modified="20150620040345256" tags="$:/tags/Stylesheet" title="$:/core/ui/SectionStyle" type="text/css">
+<pre>span.section-title &gt; span {
+  visibility: hidden;
+}
+
+span.section-title:hover &gt; span {
+  visibility: visible;
+}</pre>
+</div>
 <div created="20150611123233305" creator="Sukima" modified="20150611123234457" modifier="Sukima" title="$:/DefaultTiddlers" type="text/vnd.tiddlywiki">
 <pre>Welcome
 </pre>
@@ -5708,7 +5740,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div author="sukima" core-version="&gt;=5.1.8" dependents="" description="Allow example test suites to run with mocha in a container on the page" plugin-type="plugin" source="https://github.com/sukima/promise-tutorial" title="$:/plugins/sukima/tw5-mocha-runner" type="application/json" version="1.0.0">
+<div author="sukima" core-version="&gt;=5.1.8" dependents="" description="Mocha+Chai test framework for TiddlyWiki" plugin-type="plugin" source="https://github.com/sukima/promise-tutorial" title="$:/plugins/sukima/tw5-mocha-runner" type="application/json" version="1.0.0">
 <pre>{
     &quot;tiddlers&quot;: {
         &quot;$:/CodeTiddlers&quot;: {
@@ -6152,6 +6184,38 @@ Error message and password prompt
     }
 }</pre>
 </div>
+<div created="20150620032114044" modified="20150621015118011" tags="" title="Asynchronous Execution" type="text/vnd.tiddlywiki">
+<pre>&lt;$railroad text=&quot;&quot;&quot;
+&lt;&quot;Async Statement&quot;&gt;
+(:
+&quot;Statement 2&quot;
+/&quot;Call stack empty&quot;/
+|
+/&quot;async task completes and queues&quot;/
+)
+&quot;Statement 1&quot;
+&quot;&quot;&quot;/&gt;
+
+In this situation 
+
+!!! Try it
+
+&lt;$mocha-specs filter=&quot;SyncJSSetup AsyncJSExample&quot;/&gt;
+
+{{AsyncJSExample}}</pre>
+</div>
+<div created="20150619171431636" modified="20150620040003071" tags="Definitions" title="AsyncJavaScript" type="text/vnd.tiddlywiki">
+<pre>JavaScript has a specialized queue called the EventLoop which delegates statement execution. This EventLoop is used to manage the program execution because it is single threaded. When we talk about *asynchronosity* in JavaScript what we really mean is a queuing process that is the EventLoop.
+
+&lt;&lt;section &quot;Sychronous Execution&quot;&gt;&gt;
+
+&lt;&lt;section &quot;Asynchronous Execution&quot;&gt;&gt;</pre>
+</div>
+<div created="20150621014321079" modified="20150621014621621" tags="Snippets" title="AsyncJSExample" type="application/javascript">
+<pre>runStatement(1);
+setTimeout(function() { runStatement(2); }, 0);
+runStatement(3);</pre>
+</div>
 <div created="20150608122337343" title="CC-BY.png" type="image/png">
 <pre>iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAYAAABjyArgAAAFOklEQVRo3u1aTU8bRxj2OVIs7lw4hhttlR5TpPQHkB+QiH9Q1FskqqCIVIpUCVmuoubQUKm3JrDG5sNfeA1rY3vX9noh5MpP4Ce81fOu32V2WfAHzhoTRhqx3pmdHZ595nk/ZmJEFI/FYnRfR1+J8Kf7Yye/TXvFXcqVslQ8KFDJKNFBtUxG3aAjs0r1Zo0arQZZbZOatkXNTtOttkWWbZLZanAf9K3UDX5WN0o8Vq6U47Hxjkw2TVt7KUrtaLS5vUEbmU9cP6U/0set/+5MVYC+ADev52j/sEjlik5G7ZDBarTqDGDbaVHnxCbnc4eOT4/p5Itbce18drgNfSzb4mfwLMYoV3UeE2MHQdZ2Nj2QAfAdBTnmB7daZgbWrBqzFaAB1NU3q/T056f0MP7w0lLAPbSt/r7KfdvHbf4oYHSlUWE27x/u+0BOZ7cotau5IGc2Rsbil8svaXZ29tIccQ9tYwEYsqCCC2CaHYtZmUgmaHp6um/dQd/Enwl+FhICNlc9kIueXGznMpTec0EeBYuTfyXp0ewjbx7z8/O0tLTEFddyH33QN1KAoZOQhQtwm8zEhWcLPvCmpqZocXGRVlZWSNd1rrjGPbSpffFspWZQy3FBBpMhF64mZ2m3sOOXihuweP3fDxSPx933LizQ2dkZBQvuoQ190DcKkD2AYdCgl5AFMDcILsADkOfn53RdWV9f9wENtgBkfDB8OLwDhq9QzlN2f8+VihAWD/qPCHPxodWiWHPfHGVukQGM5QujBM3F0lbBnZubC2XEVQUfAc+oTMaY0GS840IqFBbvpkjb3hxKJqCrwtwvp6c9AUYRJn9tTfYANlga6mzQoLkquL1Y2w/I0GQYPpaKukF6xWUxa3He1WKRiUEBFoM2CAnQVwxfJAAze22TpUEMGpa6bds0bAHIIhcYE2PDhRMWFw9cFqsexTAyIQYtWCAX8oGD0oEihi8SgKGPLafFrphMCpp70yJ6hwoXDitEtLjUddtUmRgWYHgKwRISVfkKnokMYERo9onNvqywV5UGeAvQLXx1VBX8YNva2prvHxEWY2xoMSK+SzKRy7jehKLDdwpgGDcsYQki1CUFAMP8XYCpaVpom/q8LFWMjYgPUlTtumyFcoG9CeiwuGt3UiKQTzg+dbwJqSwUYzUzM8PGAYDjGstf2sTTAODSFiYTCKubPh0u+Ny1YQC+zshdxd7IjRx8X+QVZEIAMTjJME3uR6/VFYB3wCc+Mo9GBrDqpvULcORu2iQDPGigIdobaaDRr0TA8MF1wzVAVSUi2BaVRExEqHydkbvOkPVj5IQxrpHr8LtGaeRUkNVkDz465oH3q0HPWJI94qZJiAzXKrjMr3LTALLcD7ahgNGqm9ZQ3LS8fnM3bSLSlRJoqGFy0J8dZaBx2A00kLqUQOOmCZ9bnXCvNsJD5UHi+3GFyhMBsJrs+fDP36NP9iQTPDaSPXiXpCzVxPuwyZ6JABh1+dWyl658/uK5D+RBkj5gfWi6sm3S6zevv8Xd5YsfS7/+wm5UZ4iEO9rQR024P/7xMUsD/Gx8wG90+95/47dXyxwMAGSVycNsGQHcVqdJ796/i+ocQmiQEewzVoA9kG130xOaPPCmZ1I2Pa3IwA2CF3Y9BnDDARa5ULftAVqvbXvsXPC2Pc5HtM3IZaFXuvJWSIRav//hO9LSGrtw8JNt7+CJoxw8cfieevAkldHoyU9PxnFU6TZJQ2+ApQKst3+8pWK5qByd6lYcnWqb3IY+4wB2Yhl8X0dQiejBPRBf73Tl/8YjNDN/aKmsAAAAAElFTkSuQmCC</pre>
 </div>
@@ -6199,8 +6263,8 @@ var $ = {
 <div created="20150611122258439" modified="20150611122551929" tags="Meta" title="HowToUse" type="text/vnd.tiddlywiki">
 <pre>TODO:</pre>
 </div>
-<div created="20150611122601192" modified="20150611172206732" tags="Snippets" title="IntroExample" type="application/javascript">
-<pre>describe('A reader of the tutotial', function() {
+<div created="20150611122601192" modified="20150621012812696" tags="Snippets" title="IntroExample" type="application/javascript">
+<pre>describe('A reader of the tutorial', function() {
   it('passes first example', function() {
     expect('Hello kind reader').to.be.a.string
   });
@@ -6277,6 +6341,53 @@ Quality is more then the end product.</pre>
 </div>
 <div _canonical_uri="https://www.gravatar.com/avatar/a33233f156a5531707f130c28565de69?s=100&amp;r=PG" created="20150611132057907" modified="20150611132151193" tags="Meta" title="SukimaGravatar" type="image/png">
 <pre></pre>
+</div>
+<div created="20150620031904719" modified="20150621014125792" tags="" title="Sychronous Execution" type="text/vnd.tiddlywiki">
+<pre>&lt;$railroad text=&quot;&quot;&quot;
+&quot;Statement 1&quot;
+&quot;Statement 2&quot;
+&quot;Statement 3&quot;
+&quot;Statement 4&quot;
+&quot;&quot;&quot;/&gt;
+
+Notice how each statement happens one after another? Synchronous code executes one statement at a time in the order they were coded. For example:
+
+&lt;$railroad text=&quot;&quot;&quot;
+&quot;var a = 1;&quot;
+&quot;var b = 2;&quot;
+&quot;var c = a + b;&quot;
+&quot;console.log(c);&quot;
+&quot;&quot;&quot;/&gt;
+
+# Assign `a` to `1`.
+# Assign `b` to `2`.
+# Add `a` and `b`.
+# Assign `c` to previous result.
+# Call `console.log` with the value of `c`.
+# Display `3` in developer console.
+
+!!! Try it:
+
+&lt;$mocha-specs filter=&quot;SyncJSSetup SyncJSExample&quot;/&gt;
+
+{{SyncJSExample}}</pre>
+</div>
+<div created="20150621013632329" modified="20150621013847859" tags="Snippets" title="SyncJSExample" type="application/javascript">
+<pre>runStatement(1);
+runStatement(2);
+runStatement(3);
+runStatement(4);</pre>
+</div>
+<div created="20150621012911426" modified="20150621014034157" tags="Snippets Setup" title="SyncJSSetup" type="application/javascript">
+<pre>var output = document.createElement('div');
+output.style.float = 'left';
+document.getElementById('mocha').appendChild(output);
+
+function runStatement(num) {
+  var p = document.createElement('p');
+  p.appendChild(document.createTextNode('Statement ' + num));
+  output.appendChild(p);
+}</pre>
 </div>
 <div created="20150611120601853" creator="Sukima" modified="20150613192411810" modifier="Sukima" tags="Meta" title="Welcome" type="text/vnd.tiddlywiki">
 <pre>@@float:right;
