@@ -1,6 +1,6 @@
 created: 20150611120601853
 creator: Sukima
-modified: 20150613192411810
+modified: 20150621162610480
 modifier: Sukima
 tags: Meta
 title: Welcome
@@ -14,7 +14,7 @@ DeveloperNotes
 
 Thanks for checking out this little tiddly tutorial on testing [[asychronous javascript|AsyncJavaScript]]. Specifically [[promises|Promise]].
 
-This tutorial uses [[Mocha]] with [[Chai]] to run the tests (see the pro/cons of the popular TestFrameworks). Examples are designed to run in the browser as your reading them. You can also EditTheCode to play with examples and learn as you go.
+This tutorial uses [[Mocha]] with [[Chai]] to run the tests (see the pro/cons of some popular TestFrameworks). Examples are designed to run in the browser as your reading them. You can also EditTheCode to play with examples and learn as you go.
 
 Here is your first example:
 
